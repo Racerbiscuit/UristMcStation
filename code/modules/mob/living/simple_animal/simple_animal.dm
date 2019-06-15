@@ -279,9 +279,9 @@
 		damage = 0
 	if (O.damtype == STUN)
 		damage = (O.force / 8)
-	if(supernatural && istype(O,/obj/item/weapon/nullrod))
-		damage *= 2
-		purge = 3
+		if(supernatural && istype(O,/obj/item/weapon/nullrod))
+			damage *= 2
+			purge = 3
 	adjustBruteLoss(damage)
 	if(O.edge || O.sharp)
 		adjustBleedTicks(damage)

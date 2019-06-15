@@ -252,8 +252,6 @@
 			return
 		addToQueue(making)
 		to_chat(user, "<span class='notice'>[src] chimes, '[making.name] added to queue!' </span>")
-	if(. == TOPIC_REFRESH)
-		interact(user)
 
 /obj/machinery/autolathe/update_icon()
 	icon_state = (panel_open ? "autolathe_t" : "autolathe")
@@ -325,8 +323,8 @@
 	for(var/material in making.resources)
 		if(!isnull(stored_material[material]))
 			if(stored_material[material] < round(making.resources[material] * mat_efficiency))
-				visible_message("<span class='warning'>[src] buzzes, 'Not enough materials for [making.name]!</span>")
-				removeFromQueue(1)
+				visible_message("<span class='warning'>[src] buzzes, 'Not enough materials for [making.name], flushing queue.'</span>")
+				queue.Cut(1)
 				return TOPIC_REFRESH
 
 	//Consume materials.
